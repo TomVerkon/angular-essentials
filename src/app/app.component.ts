@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DUMMY_USERS } from './dummy-user';
 import { HeaderComponent } from './header/header.component';
 import { TasksComponent } from './tasks/tasks.component';
-import { UserComponent } from './user/user.component';
+import { User, UserComponent } from './user/user.component';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +13,10 @@ import { UserComponent } from './user/user.component';
 })
 export class AppComponent {
   users = DUMMY_USERS;
-  name = 'non-selected';
+  selectedUser: User | undefined = undefined;
 
-  onSelectUser(name: string) {
-    this.name = name;
+  onSelectUser(event: User): void {
+    console.log(event);
+    this.selectedUser = event;
   }
 }

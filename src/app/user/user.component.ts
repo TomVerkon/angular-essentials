@@ -1,5 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+export interface User {
+  id: string;
+  avatar: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -8,9 +14,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class UserComponent {
   // traditional parameter passing
-  @Input({ required: true }) id!: string;
-  @Input({ required: true }) avatar!: string;
-  @Input({ required: true }) name!: string;
+  @Input({ required: true }) user!: User;
   @Output() select = new EventEmitter<string>();
   // new signal parameter passing
   // id = input.required<string>();
@@ -19,12 +23,12 @@ export class UserComponent {
   // select = output<string>();
 
   get imagePath() {
-    return 'assets/users/' + this.avatar;
+    return 'assets/users/' + this.user.avatar;
     // return 'assets/users/' + this.avatar();
   }
 
   onSelectUser() {
-    this.select.emit(this.name);
+    this.select.emit(this.user.name);
     // this.select.emit(this.id());
   }
 }

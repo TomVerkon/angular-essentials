@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
+import { User } from '../user/user.component';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
   imports: [],
-  template: '<div>{{ name }}</div>',
+  template: '<h2> {{ this.user.name }} </h2>',
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  @Input({ required: true }) name!: string;
+  @Input({ required: true }) user!: User;
 }
