@@ -15,7 +15,7 @@ export interface User {
 export class UserComponent {
   // traditional parameter passing
   @Input({ required: true }) user!: User;
-  @Output() select = new EventEmitter<string>();
+  @Output() select = new EventEmitter<User>();
   // new signal parameter passing
   // id = input.required<string>();
   // avatar = input.required<string>();
@@ -28,7 +28,7 @@ export class UserComponent {
   }
 
   onSelectUser() {
-    this.select.emit(this.user.name);
+    this.select.emit(this.user);
     // this.select.emit(this.id());
   }
 }
