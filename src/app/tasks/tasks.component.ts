@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DUMMY_TASKS } from '../dummy-tasks';
 import { User } from '../user/user.component';
 import { TaskComponent } from './task/task.component';
 
@@ -18,5 +19,14 @@ export interface iTask {
 })
 export class TasksComponent {
   @Input({ required: true }) user!: User;
-  @Input({ required: true }) selectedTasks: iTask[] | [] = [];
+  //  @Input({ required: true }) selectedTasks: iTask[] | [] = [];
+  tasks = DUMMY_TASKS;
+
+  onCompleteTask(id: string) {
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
+
+  get selectedUserTasks() {
+    return this.tasks.filter((task) => task.userId === this.user.id);
+  }
 }
