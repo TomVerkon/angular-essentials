@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CardComponent } from '../shared/card/card.component';
 
 export interface User {
   id: string;
@@ -11,6 +12,7 @@ export interface User {
   standalone: true,
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
+  imports: [CardComponent],
 })
 export class UserComponent {
   // traditional parameter passing
