@@ -1,16 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { DUMMY_TASKS } from '../dummy-tasks';
 import { User } from '../user/user.component';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { TaskComponent } from './task/task.component';
+import { TasksService } from './tasks.service';
 
-export interface iTask {
-  id?: string;
-  userId?: string;
-  title: string;
-  summary: string;
-  dueDate: string;
-}
 @Component({
   selector: 'app-tasks',
   standalone: true,
@@ -21,32 +14,18 @@ export interface iTask {
 export class TasksComponent {
   @Input({ required: true }) user!: User;
   isAddingTask = false;
-  tasks = DUMMY_TASKS;
 
-  onCompleteTask(id: string) {
-    this.tasks = this.tasks.filter((task) => task.id !== id);
-  }
+  constructor(private tasksService: TasksService) {}
 
   get selectedUserTasks() {
-    return this.tasks.filter((task) => task.userId === this.user.id);
+    return this.tasksService.getUserTasks(this.user.id);
   }
 
   onStartAddTask() {
     this.isAddingTask = true;
   }
 
-  onCancelAddTask() {
-    this.isAddingTask = false;
-  }
-
-  onAddTask(data: iTask) {
-    console.log('data: ', data);
-
-    this.tasks.push({
-      id: new Date().getTime().toString(),
-      userId: this.user.id,
-      ...data,
-    });
+  onCloseAddTask() {
     this.isAddingTask = false;
   }
 }
