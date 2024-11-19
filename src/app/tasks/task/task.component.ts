@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { TasksService } from '../tasks.service';
 
@@ -12,8 +11,6 @@ interface iTask {
 
 @Component({
   selector: 'app-task',
-  standalone: true,
-  imports: [DatePipe],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css',
 })
